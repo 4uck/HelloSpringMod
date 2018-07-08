@@ -34,33 +34,33 @@ public class TimeTrackerApplication {
     @Configuration
     class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
-//        @Autowired
-//        AccountRepository accountRepository;
+        @Autowired
+        AccountRepository accountRepository;
 
-//        @Override
-//        public void init(AuthenticationManagerBuilder auth) throws Exception {
-//            auth.userDetailsService(userDetailsService());
-//        }
+        @Override
+        public void init(AuthenticationManagerBuilder auth) throws Exception {
+            auth.userDetailsService(userDetailsService());
+        }
 
-//        @Bean
-//        UserDetailsService userDetailsService() {
-//            return new UserDetailsService() {
-//
-//                @Override
-//                public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//
-//                    Account account = accountRepository.findByLogin(username);
-//                    if(account != null) {
-//                        return new User(account.getLogin(), account.getPassword(), true, true, true, true,
-//                                AuthorityUtils.createAuthorityList("USER"));
-//                    } else {
-//                        throw new UsernameNotFoundException("could not find the user '"
-//                                + username + "'");
-//                    }
-//                }
-//
-//            };
-//        }
+        @Bean
+        UserDetailsService userDetailsService() {
+            return new UserDetailsService() {
+
+                @Override
+                public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+                    Account account = accountRepository.findByLogin(username);
+                    if(account != null) {
+                        return new User(account.getLogin(), account.getPassword(), true, true, true, true,
+                                AuthorityUtils.createAuthorityList("USER"));
+                    } else {
+                        throw new UsernameNotFoundException("could not find the user '"
+                                + username + "'");
+                    }
+                }
+
+            };
+        }
     }
 
     @EnableWebSecurity

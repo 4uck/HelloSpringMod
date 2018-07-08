@@ -11,7 +11,7 @@ spring:
 
 spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
 spring.datasource.platform: postgres
-spring.datasource.url: jdbc:postgresql://192.168.0.54:5432/postgres
-spring.datasource.username: postgres
-spring.datasource.password: 1234567
+spring.datasource.url: jdbc:postgresql://ec2-184-73-199-189.compute-1.amazonaws.com:5432/d8thj3pt84u9m0
+spring.datasource.username: aaxfkkwxagbvrv
+spring.datasource.password: 3271afe5cd1cfd77d0d63acc23188a78f1b196478bd15c3e87a926c7f95f8868
 spring.jpa.hibernate.ddl-auto: update
