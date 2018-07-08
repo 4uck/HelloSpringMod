@@ -1,0 +1,14 @@
+language: java
+
+before_install:
+  - chmod +x mvnw
+
+script:
+  - mvn clean test
+after_success:
+  - echo "SUCCESS BUILD"
+  - ls -l $TRAVIS_BUILD_DIR/target
+deploy:
+  provider: heroku
+  api_key: bf80437d-9127-4b92-8ae9-9f0ced73ba20
+  app: timetrackermod

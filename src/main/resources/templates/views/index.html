@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Авторизация</title>
+	<link rel="stylesheet" href="css/index.css">
+
+    <script src="js/tryRedirect.js"></script>
+
+</head>
+
+<script src="js/auth.js" async></script>
+
+<body>
+    <div id="login-form">
+        <h1>Авторизация на сайте</h1>
+
+        <fieldset>
+            <div>
+                <input id="email" type="email" placeholder="email">
+                <input id="password" type="password" placeholder="Пароль">
+                <input type="button" value="ВОЙТИ" onclick="getToken()">
+                <footer class="clearfix">
+                    <p><span class="info">?</span><a name="registry" href="registry">Регистрация</a></p>
+                </footer>
+            </div>
+        </fieldset>
+    </div>
+</body>
+</html>
