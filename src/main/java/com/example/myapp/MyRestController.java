@@ -16,93 +16,93 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public final class MyRestController {
 
+    @Autowired
+    private AccountRepository repository;
+
 //    @Autowired
-//    private AccountRepository repository;
-//
-////    @Autowired
-////    private TimeStampRepository timeStampRepository;
-//
-//    @RequestMapping(value = "/addUser", consumes = {"application/json;charset=UTF-8"})
-//    public ResponseEntity addUser(
-//            final @RequestBody Account account
-//    ) {
-//
-//        System.out.println("////////////////////////");
-//        System.out.println("////////////////////////");
-//        System.out.println(account.getLogin());
-//        System.out.println(account.getPassword());
-//        System.out.println("//////////////////////");
-//        System.out.println("//////////////////////");
-//
-//        if (repository.existsByLogin(account.getLogin())) {
-//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//        }
-//
-//        PasswordEncoder encoder =
-//                PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//
-//        account.setPassword(encoder.encode(account.getPassword()));
-//        repository.save(account);
-//
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
+//    private TimeStampRepository timeStampRepository;
+
+    @RequestMapping(value = "/addUser", consumes = {"application/json;charset=UTF-8"})
+    public ResponseEntity addUser(
+            final @RequestBody Account account
+    ) {
+
+        System.out.println("////////////////////////");
+        System.out.println("////////////////////////");
+        System.out.println(account.getLogin());
+        System.out.println(account.getPassword());
+        System.out.println("//////////////////////");
+        System.out.println("//////////////////////");
+
+        if (repository.existsByLogin(account.getLogin())) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
+        PasswordEncoder encoder =
+                PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
+        account.setPassword(encoder.encode(account.getPassword()));
+        repository.save(account);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
     enum  MyState {
         PAUSE, START
     }
 
-//    /**
-//     * this method return total time for user, and clear all timestamps for user.
-//     * @param token jwt toker
-//     * @return json object(general time in hours, minutes, secundes. And general time in milliseconds)
-//     */
-//    @RequestMapping(value = "/timestamps/STOP", method = RequestMethod.GET)
-//    public @ResponseBody TimeStampResponse getTime(
-//            final @RequestHeader(value = "Authorization") String token
-//    ) {
-//
-//        String login = TokenAuthenticationService.getLoginName(token);
-//        Account account = repository.findByLogin(login);
-//
-//        for (Long l: account.getTimestamps()) {
-//            System.out.println(l);
-//        }
-//
-//        Long timeMill = getTimeMill(account.getTimestamps());
-//
-////        account.setTimestamps(null);
-////        repository.save(account);
-//
-//        TimeStampResponse response = new TimeStampResponse(timeMill);
-//
-//        return response;
-//    }
-//
-//    /**
-//     * this method add timestamp for user.
-//     * @param token jwt token
-//     * @param state current state(start, pause)
-//     * @return status code
-//     */
-//    @RequestMapping(value = "/timestamps/{state}", method = RequestMethod.GET)
-//    public ResponseEntity timestamps(
-//            final @RequestHeader(value = "Authorization") String token,
-//            final @PathVariable("state") MyState state
-//    ) {
-//        String login = TokenAuthenticationService.getLoginName(token);
-//
-//        Long now = new Date().getTime();
-//
-//        if (state.ordinal() == 0) {
-//            now = -now;
-//        }
-//
-//        Account account = repository.findByLogin(login);
-//        account.getTimestamps().add(now);
+    /**
+     * this method return total time for user, and clear all timestamps for user.
+     * @param token jwt toker
+     * @return json object(general time in hours, minutes, secundes. And general time in milliseconds)
+     */
+    @RequestMapping(value = "/timestamps/STOP", method = RequestMethod.GET)
+    public @ResponseBody TimeStampResponse getTime(
+            final @RequestHeader(value = "Authorization") String token
+    ) {
+
+        String login = TokenAuthenticationService.getLoginName(token);
+        Account account = repository.findByLogin(login);
+
+        for (Long l: account.getTimestamps()) {
+            System.out.println(l);
+        }
+
+        Long timeMill = getTimeMill(account.getTimestamps());
+
+//        account.setTimestamps(null);
 //        repository.save(account);
-//
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
+
+        TimeStampResponse response = new TimeStampResponse(timeMill);
+
+        return response;
+    }
+
+    /**
+     * this method add timestamp for user.
+     * @param token jwt token
+     * @param state current state(start, pause)
+     * @return status code
+     */
+    @RequestMapping(value = "/timestamps/{state}", method = RequestMethod.GET)
+    public ResponseEntity timestamps(
+            final @RequestHeader(value = "Authorization") String token,
+            final @PathVariable("state") MyState state
+    ) {
+        String login = TokenAuthenticationService.getLoginName(token);
+
+        Long now = new Date().getTime();
+
+        if (state.ordinal() == 0) {
+            now = -now;
+        }
+
+        Account account = repository.findByLogin(login);
+        account.getTimestamps().add(now);
+        repository.save(account);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
     /**
      * this methods calculates total time with all starts and pauses.
@@ -140,10 +140,5 @@ public final class MyRestController {
             final @RequestHeader(value = "Authorization", required = true) String token
     ) {
         return TokenAuthenticationService.getLoginName(token);
-    }
-
-    @RequestMapping("/helloWorld")
-    public @ResponseBody String helloWorld() {
-        return "Hello world!";
     }
 }
