@@ -22,9 +22,7 @@ body{
     align-items: center;
     flex-direction: column;
     height: 30vh;
-    visibility: hidden;
 }
-
 
 .container3>output{
     font-size: 250%;

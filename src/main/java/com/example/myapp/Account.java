@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Specification user collection into mongodb.
+ * Specification user collection into postgres.
  */
 @Entity
 @Table(name = "accounts")
@@ -14,7 +14,7 @@ public final class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String login;
+    private String username;
     private String password;
 
     @ElementCollection
@@ -25,19 +25,24 @@ public final class Account {
     public Account() {
     }
 
-    public Account(final String login, final String password) {
-        this.login = login;
+    public Account(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
-//    public Account(String login, String password, List<TimeStamp> timestamp) {
+    //    public Account(String login, String password, List<TimeStamp> timestamp) {
 //        this.login = login;
 //        this.password = password;
 //        this.timestamp = timestamp;
 //    }
 
-    public String getLogin() {
-        return login;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -50,10 +55,6 @@ public final class Account {
 
     public void setTimestamps(List<Long> timestamps) {
         this.timestamps = timestamps;
-    }
-
-    public void setLogin(final String login) {
-        this.login = login;
     }
 
     public void setPassword(final String password) {

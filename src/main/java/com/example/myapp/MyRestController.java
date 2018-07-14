@@ -5,6 +5,7 @@ import com.example.myapp.security.TokenAuthenticationService;
 import java.util.Date;
 import java.util.List;
 
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,6 @@ public final class MyRestController {
     @Autowired
     private AccountRepository repository;
 
-//    @Autowired
-//    private TimeStampRepository timeStampRepository;
-
     @RequestMapping(value = "/addUser", consumes = {"application/json;charset=UTF-8"})
     public ResponseEntity addUser(
             final @RequestBody Account account
@@ -29,12 +27,12 @@ public final class MyRestController {
 
         System.out.println("////////////////////////");
         System.out.println("////////////////////////");
-        System.out.println(account.getLogin());
+        System.out.println(account.getUsername());
         System.out.println(account.getPassword());
         System.out.println("//////////////////////");
         System.out.println("//////////////////////");
 
-        if (repository.existsByLogin(account.getLogin())) {
+        if (repository.existsByUsername(account.getUsername())) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
@@ -62,7 +60,7 @@ public final class MyRestController {
     ) {
 
         String login = TokenAuthenticationService.getLoginName(token);
-        Account account = repository.findByLogin(login);
+        Account account = repository.findByUsername(login);
 
         for (Long l: account.getTimestamps()) {
             System.out.println(l);
@@ -70,8 +68,8 @@ public final class MyRestController {
 
         Long timeMill = getTimeMill(account.getTimestamps());
 
-//        account.setTimestamps(null);
-//        repository.save(account);
+        account.setTimestamps(null);
+        repository.save(account);
 
         TimeStampResponse response = new TimeStampResponse(timeMill);
 
@@ -97,7 +95,7 @@ public final class MyRestController {
             now = -now;
         }
 
-        Account account = repository.findByLogin(login);
+        Account account = repository.findByUsername(login);
         account.getTimestamps().add(now);
         repository.save(account);
 
@@ -136,9 +134,11 @@ public final class MyRestController {
     }
 
     @RequestMapping("/getName")
-    public @ResponseBody String getName(
+    public ResponseEntity<String>  getName(
             final @RequestHeader(value = "Authorization", required = true) String token
     ) {
-        return TokenAuthenticationService.getLoginName(token);
+        String username = TokenAuthenticationService.getLoginName(token);
+
+        return new ResponseEntity<String>("{\"username\":\"" + username + "\"}", HttpStatus.OK);
     }
 }

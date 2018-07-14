@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,38 +11,47 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="js/general-controller.js"></script>
+    <script src="js/home-controller.js"></script>
+
 </head>
 
-<script src="js/logout.js" async></script>
-<script src="js/workWithTime.js" async></script>
+<!--<script src="js/logout.js" async></script>-->
+<!--<script src="js/workWithTime.js" async></script>-->
 
 <body>
 
-    <div class="container2">
-        <output id="name"></output>
-        <script src="js/getNameUser.js"></script>
-        <button class="mdl-button mdl-js-button" onclick="logout()">
+    <div class="container2" ng-controller="HomeCtrl">
+        <output>{{email}}</output>
+        <!--<script src="js/getNameUser.js"></script>-->
+        <button class="mdl-button mdl-js-button" ng-click="logout()">
             ВЫЙТИ
         </button>
     </div>
 
-    <div id="divTime" class="container3">
-        <output id="sumTime"></output>
-    </div>
+    <!--<div class="container3" ng-controller="TimeCtrl">-->
+        <!--<output>{{timeStr}}</output>-->
+    <!--</div>-->
 
-    <div class="container">
+    <div class="container" ng-controller="TimeCtrl">
+
+        <div class="container3">
+            <output>{{timeStr}}</output>
+        </div>
+
         <!-- Accent-colored raised button with ripple -->
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick=sendTime("START")>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click=sendTime("START")>
         Пришел
       </button>
 
       <!-- Accent-colored raised button with ripple -->
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick=sendTime("PAUSE")>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click=sendTime("PAUSE")>
         Ушел
       </button>
 
       <!-- Accent-colored raised button with ripple -->
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick=sendTime("STOP")>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click=sendTime("STOP")>
         Отработал
       </button>
       

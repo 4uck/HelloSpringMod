@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" ng-app="myApp">
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
@@ -7,20 +7,24 @@
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="js/general-controller.js"></script>
+    <script src="js/index-controller.js"></script>
 </head>
 <body>
 
-<script src="js/script.js"></script>
+<!--<script src="js/script.js"></script>-->
 
-<div id="login-form">
+<div id="login-form" ng-controller="AuthCtrl">
     <h1>Регистрация на сайте</h1>
 
     <fieldset>
         <div name="data">
-            <input id="email" type="email" placeholder="email">
-            <input id="password" type="password" placeholder="Пароль">
-            <input id="confPass" type="password" placeholder="Повторите пароль">
-            <input type="button" value="Регистрация" onclick="getAction()">
+            <input type="email" placeholder="email" ng-model="email">
+            <input type="password" placeholder="Пароль" ng-model="password">
+            <input type="password" placeholder="Повторите пароль" ng-model="confPass">
+            <input type="button" value="Регистрация" ng-click="getAction()">
         </div>
     </fieldset>
 </div>

@@ -49,9 +49,9 @@ public class TimeTrackerApplication {
                 @Override
                 public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-                    Account account = accountRepository.findByLogin(username);
+                    Account account = accountRepository.findByUsername(username);
                     if(account != null) {
-                        return new User(account.getLogin(), account.getPassword(), true, true, true, true,
+                        return new User(account.getUsername(), account.getPassword(), true, true, true, true,
                                 AuthorityUtils.createAuthorityList("USER"));
                     } else {
                         throw new UsernameNotFoundException("could not find the user '"
@@ -80,8 +80,6 @@ public class TimeTrackerApplication {
             accessList.add("/");
             accessList.add("/addUser");
             accessList.add("/favicon.ico");
-            accessList.add("/timetest");
-            accessList.add("/helloWorld");
 
             http.csrf().disable().authorizeRequests()
                     .antMatchers(accessList.toArray(new String[accessList.size()])).permitAll()

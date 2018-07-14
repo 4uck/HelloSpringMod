@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" ng-app="myApp">
 <head>
 	<meta charset="UTF-8">
 	<title>Авторизация</title>
 	<link rel="stylesheet" href="css/index.css">
 
-    <script src="js/tryRedirect.js"></script>
+    <!--<script src="js/tryRedirect.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="js/general-controller.js"></script>
+    <script src="js/index-controller.js"></script>
 
 </head>
 
-<script src="js/auth.js" async></script>
+<!--<script src="js/auth.js" async></script>-->
 
 <body>
-    <div id="login-form">
+    <div id="login-form" ng-controller="AuthCtrl">
         <h1>Авторизация на сайте</h1>
 
         <fieldset>
             <div>
-                <input id="email" type="email" placeholder="email">
-                <input id="password" type="password" placeholder="Пароль">
-                <input type="button" value="ВОЙТИ" onclick="getToken()">
+                <input type="email" placeholder="email" ng-model="email">
+                <input type="password" placeholder="Пароль" ng-model="password">
+                <input type="button" value="ВОЙТИ" ng-click="getToken()">
                 <footer class="clearfix">
                     <p><span class="info">?</span><a name="registry" href="registry">Регистрация</a></p>
                 </footer>

@@ -1,6 +1,7 @@
 package com.example.myapp.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.security.core.Authentication;
@@ -32,6 +33,8 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
             filterChain.doFilter(request,response);
 
         }catch (ExpiredJwtException e){
+            ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        }catch (MalformedJwtException e){
             ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
