@@ -64,7 +64,9 @@ function sendUser(email, pass){
        }
      }).then(function successCallback(response) {
 
-         localStorage.setItem('token', response.headers('Authorization'));
+        if ($scope.path == "/home")
+            localStorage.setItem('token', response.headers('Authorization'));
+
          window.location.pathname = $scope.path;
 
        }, function errorCallback(response) {
