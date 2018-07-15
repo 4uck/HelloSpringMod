@@ -4,15 +4,12 @@ import com.example.myapp.security.TokenAuthenticationService;
 
 import java.util.Date;
 import java.util.List;
-
-import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 
 @RestController
 public final class MyRestController {
@@ -24,13 +21,6 @@ public final class MyRestController {
     public ResponseEntity addUser(
             final @RequestBody Account account
     ) {
-
-        System.out.println("////////////////////////");
-        System.out.println("////////////////////////");
-        System.out.println(account.getUsername());
-        System.out.println(account.getPassword());
-        System.out.println("//////////////////////");
-        System.out.println("//////////////////////");
 
         if (repository.existsByUsername(account.getUsername())) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
