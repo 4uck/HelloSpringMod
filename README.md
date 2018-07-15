@@ -16,9 +16,9 @@ Time tracker at spring framework
 
 ## Как запустить
 В файле src/resources/application.yml описаны профили spring.
-В этих профилях описаны соответствующие данные для доступа к mongodb.
+В этих профилях описаны соответствующие данные для доступа к postgres.
 Можно описать там свой профиль, либо использовать общедоступную базу на heroku.
 
 
-Команда для запуска с mongodb на heroku:   
+Команда для запуска с postgres на heroku:   
   `java -jar target/myapp-0.0.1-SNAPSHOT.jar --spring.profiles.active=herokudb`   
