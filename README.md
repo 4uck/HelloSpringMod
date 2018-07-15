@@ -1,7 +1,7 @@
 # HelloSpring
 Time tracker at spring framework
 
-[ссылка на heroku](https://obscure-ridge-44188.herokuapp.com/)
+[ссылка на heroku](https://timetrackermod.herokuapp.com)
 
 В авторизации нету подтверждения по почте, поэтому можно использовать любой шаблон, например: ab@mail.ru
 
