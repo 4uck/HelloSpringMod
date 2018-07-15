@@ -43,3 +43,7 @@ body{
 .container2>output{
     margin: 10px;
 }
+
+#my>output{
+	margin: 10px;
+}
