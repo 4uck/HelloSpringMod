@@ -27,7 +27,7 @@ import java.util.List;
 @EnableAutoConfiguration
 public class TimeTrackerApplication {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         SpringApplication.run(TimeTrackerApplication.class, args);
     }
 
@@ -35,10 +35,10 @@ public class TimeTrackerApplication {
     class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
         @Autowired
-        AccountRepository accountRepository;
+        private AccountRepository accountRepository;
 
         @Override
-        public void init(AuthenticationManagerBuilder auth) throws Exception {
+        public void init(final AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(userDetailsService());
         }
 
@@ -47,10 +47,10 @@ public class TimeTrackerApplication {
             return new UserDetailsService() {
 
                 @Override
-                public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 
                     Account account = accountRepository.findByUsername(username);
-                    if(account != null) {
+                    if (account != null) {
                         return new User(account.getUsername(), account.getPassword(), true, true, true, true,
                                 AuthorityUtils.createAuthorityList("USER"));
                     } else {
@@ -68,7 +68,7 @@ public class TimeTrackerApplication {
     class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
-        protected void configure(HttpSecurity http) throws Exception {
+        protected void configure(final HttpSecurity http) throws Exception {
 
             List<String> accessList = new ArrayList<String>();
 

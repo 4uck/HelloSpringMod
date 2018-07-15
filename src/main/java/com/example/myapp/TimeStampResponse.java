@@ -1,6 +1,10 @@
 package com.example.myapp;
 
 public final class TimeStampResponse {
+    private static final int MILLISEC_PER_SEC = 1000;
+    private static final int MILLISEC_PER_MIN = 60000;
+    private static final int MILLISEC_PER_HOUR = 3600000;
+    private static final int UNIVERSAL_COUNT = 60;
 
     private Long currentTimeMilliseconds;
     private int seconds;
@@ -9,9 +13,12 @@ public final class TimeStampResponse {
 
     public TimeStampResponse(final Long currentTimeMilliseconds) {
         this.currentTimeMilliseconds = currentTimeMilliseconds;
-        this.seconds = (int) (currentTimeMilliseconds/1000)%60;
-        this.minutes = (int) (currentTimeMilliseconds/60000) % 60;
-        this.hours = (int) (currentTimeMilliseconds/3600000);
+        this.seconds = (int)
+                (currentTimeMilliseconds / MILLISEC_PER_SEC) % UNIVERSAL_COUNT;
+        this.minutes = (int)
+                (currentTimeMilliseconds / MILLISEC_PER_MIN) % UNIVERSAL_COUNT;
+        this.hours = (int)
+                (currentTimeMilliseconds / MILLISEC_PER_HOUR);
     }
 
     public Long getCurrentTimeMilliseconds() {

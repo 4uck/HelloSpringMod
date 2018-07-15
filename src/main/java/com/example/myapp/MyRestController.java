@@ -62,10 +62,6 @@ public final class MyRestController {
         String login = TokenAuthenticationService.getLoginName(token);
         Account account = repository.findByUsername(login);
 
-        for (Long l: account.getTimestamps()) {
-            System.out.println(l);
-        }
-
         Long timeMill = getTimeMill(account.getTimestamps());
 
         account.setTimestamps(null);

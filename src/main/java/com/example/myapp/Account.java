@@ -1,7 +1,8 @@
 package com.example.myapp;
 
-import javax.persistence.*;
 import java.util.List;
+import javax.persistence.*;
+
 
 /**
  * Specification user collection into postgres.
@@ -18,30 +19,23 @@ public final class Account {
     private String password;
 
     @ElementCollection
-    @CollectionTable(name="Timestamps")
-    @Column(name="timestamp")
-    List<Long> timestamps;
+    @CollectionTable(name = "Timestamps")
+    @Column(name = "timestamp")
+    private List<Long> timestamps;
 
     public Account() {
     }
 
-    public Account(String username, String password) {
+    public Account(final String username, final String password) {
         this.username = username;
         this.password = password;
     }
-
-    //    public Account(String login, String password, List<TimeStamp> timestamp) {
-//        this.login = login;
-//        this.password = password;
-//        this.timestamp = timestamp;
-//    }
-
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -53,7 +47,7 @@ public final class Account {
         return timestamps;
     }
 
-    public void setTimestamps(List<Long> timestamps) {
+    public void setTimestamps(final List<Long> timestamps) {
         this.timestamps = timestamps;
     }
 
